@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateUI() {
         let income = 0, expenses = 0, balance = 0;
         transactionList.innerHTML = "";
-
         transactions.forEach(transaction => {
             const li = document.createElement("li");
             li.innerHTML = `${transaction.desc} - $${transaction.amount} 
@@ -26,9 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         balance = income - expenses;
-
         balanceEl.textContent = `$${balance.toFixed(2)}`;
         incomeEl.textContent = `$${income.toFixed(2)}`;
         expensesEl.textContent = `$${expenses.toFixed(2)}`;
         localStorage.setItem("transactions", JSON.stringify(transactions));
-    }
+    }}
