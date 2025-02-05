@@ -29,4 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
         incomeEl.textContent = `$${income.toFixed(2)}`;
         expensesEl.textContent = `$${expenses.toFixed(2)}`;
         localStorage.setItem("transactions", JSON.stringify(transactions));
-    }}
+    }
+
+    transactionForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const desc = document.getElementById("desc").value;
+        const amount = parseFloat(document.getElementById("amount").value);
+
+    }}}
