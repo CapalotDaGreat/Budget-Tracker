@@ -36,4 +36,4 @@ document.addEventListener("DOMContentLoaded", () => {
         const desc = document.getElementById("desc").value;
         const amount = parseFloat(document.getElementById("amount").value);
 
-    }}}
+    }};;
