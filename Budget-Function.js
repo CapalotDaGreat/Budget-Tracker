@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         transactions.forEach(transaction => {
             const li = document.createElement("li");
-            li.innerHTML = `${transaction.desc} - $${parseFloat(transaction.amount).toFixed(2)} 
+            li.innerHTML = `${transaction.desc} - ${Math.abs(parseFloat(transaction.amount)).toFixed(2)} 
                 <button onclick="removeTransaction(${transaction.id})">X</button>`;
             transactionList.appendChild(li);
 
@@ -29,9 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const balance = income - expenses;
 
-        balanceEl.textContent = `$${balance.toFixed(2)}`;
-        incomeEl.textContent = `$${income.toFixed(2)}`;
-        expensesEl.textContent = `$${expenses.toFixed(2)}`;
+        balanceEl.textContent = `${balance.toFixed(2)}`; // Display balance
+        incomeEl.textContent = `${income.toFixed(2)}`;
+        expensesEl.textContent = `${expenses.toFixed(2)}`;
         localStorage.setItem("transactions", JSON.stringify(transactions));
     }
 
@@ -40,13 +40,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const desc = descInput.value.trim();
         let amount = parseFloat(amountInput.value.trim());
-        const category = categoryInput.value;
+        const category = categoryInput.value.toLowerCase();
 
         if (!desc || isNaN(amount)) return;
 
-        const expenseCategories = ["Food", "Rent", "Tax", "Entertainment"];
-        if (expenseCategories.includes(category) && amount > 0) {
-            amount = -amount;
+        if (category === "income") {
+            amount = Math.abs(amount);
+        } else {
+            amount = Math.abs(amount) * -1;
         }
 
         const transaction = {
@@ -65,6 +66,5 @@ document.addEventListener("DOMContentLoaded", () => {
         transactions = transactions.filter(transaction => transaction.id !== id);
         updateUI();
     };
-
     updateUI();
 });
