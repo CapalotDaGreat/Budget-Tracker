@@ -4,27 +4,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const expensesEl = document.getElementById("expenses");
     const transactionForm = document.getElementById("transaction-form");
     const transactionList = document.getElementById("transaction-list");
-    const categoryEl = document.getElementById("category");
+    const descInput = document.getElementById("desc");
+    const amountInput = document.getElementById("amount");
+    const categoryInput = document.getElementById("category");
 
     let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
     function updateUI() {
-        let income = 0, expenses = 0, balance = 0;
+        let income = 0, expenses = 0;
         transactionList.innerHTML = "";
+
         transactions.forEach(transaction => {
             const li = document.createElement("li");
-            li.innerHTML = `${transaction.desc} - $${transaction.amount} 
+            li.innerHTML = `${transaction.desc} - $${parseFloat(transaction.amount).toFixed(2)} 
                 <button onclick="removeTransaction(${transaction.id})">X</button>`;
             transactionList.appendChild(li);
 
             if (transaction.amount > 0) {
-                income += transaction.amount;
+                income += parseFloat(transaction.amount);
             } else {
-                expenses += Math.abs(transaction.amount);
+                expenses += Math.abs(parseFloat(transaction.amount));
             }
         });
 
-        balance = income - expenses;
+        const balance = income - expenses;
+
         balanceEl.textContent = `$${balance.toFixed(2)}`;
         incomeEl.textContent = `$${income.toFixed(2)}`;
         expensesEl.textContent = `$${expenses.toFixed(2)}`;
@@ -33,22 +37,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     transactionForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        const desc = document.getElementById("desc").value;
-        const amount = parseFloat(document.getElementById("amount").value);
-    })
 
-    transactionForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const desc = document.getElementById("desc").value;
-        const amount = parseFloat(document.getElementById("amount").value);
+        const desc = descInput.value.trim();
+        let amount = parseFloat(amountInput.value.trim());
+        const category = categoryInput.value;
 
         if (!desc || isNaN(amount)) return;
+
+        const expenseCategories = ["Food", "Rent", "Tax", "Entertainment"];
+        if (expenseCategories.includes(category) && amount > 0) {
+            amount = -amount;
+        }
 
         const transaction = {
             id: Date.now(),
             desc,
             amount,
-            category: categoryEl.value
+            category
         };
 
         transactions.push(transaction);
