@@ -35,5 +35,31 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const desc = document.getElementById("desc").value;
         const amount = parseFloat(document.getElementById("amount").value);
+    })
 
-    }};;
+    transactionForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const desc = document.getElementById("desc").value;
+        const amount = parseFloat(document.getElementById("amount").value);
+
+        if (!desc || isNaN(amount)) return;
+
+        const transaction = {
+            id: Date.now(),
+            desc,
+            amount,
+            category: categoryEl.value
+        };
+
+        transactions.push(transaction);
+        updateUI();
+        transactionForm.reset();
+    });
+
+    window.removeTransaction = (id) => {
+        transactions = transactions.filter(transaction => transaction.id !== id);
+        updateUI();
+    };
+
+    updateUI();
+});
