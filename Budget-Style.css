@@ -22,3 +22,35 @@ body {
     border-radius: 10px;
     text-align: center;
 }
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.balance h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+.summary {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.income, .expenses {
+    width: 45%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.income {
+    background: #d4edda;
+    color: #155724;
+}
+
+.expenses {
+    background: #f8d7da;
+    color: #721c24;
+}
