@@ -7,6 +7,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const descInput = document.getElementById("desc");
     const amountInput = document.getElementById("amount");
     const categoryInput = document.getElementById("category");
+    const monthSelect = document.createElement("select");
+
+    // Generate month options
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    months.forEach((month, index) => {
+        let option = document.createElement("option");
+        option.value = index;
+        option.textContent = month;
+        monthSelect.appendChild(option);
+    });
+    document.querySelector(".container").insertBefore(monthSelect, transactionList);
 
     let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
@@ -14,9 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
         let income = 0, expenses = 0;
         transactionList.innerHTML = "";
 
-        transactions.forEach(transaction => {
+        const selectedMonth = parseInt(monthSelect.value);
+        const filteredTransactions = transactions.filter(transaction => new Date(transaction.date).getMonth() === selectedMonth);
+
+        filteredTransactions.forEach(transaction => {
             const li = document.createElement("li");
-            li.innerHTML = `${transaction.desc} - ${Math.abs(parseFloat(transaction.amount)).toFixed(2)} 
+            li.innerHTML = `${transaction.desc} - $${parseFloat(transaction.amount).toFixed(2)} 
                 <button onclick="removeTransaction(${transaction.id})">X</button>`;
             transactionList.appendChild(li);
 
@@ -29,9 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const balance = income - expenses;
 
-        balanceEl.textContent = `${balance.toFixed(2)}`; // Display balance
-        incomeEl.textContent = `${income.toFixed(2)}`;
-        expensesEl.textContent = `${expenses.toFixed(2)}`;
+        balanceEl.textContent = `$${balance.toFixed(2)}`;
+        incomeEl.textContent = `$${income.toFixed(2)}`;
+        expensesEl.textContent = `$${expenses.toFixed(2)}`;
         localStorage.setItem("transactions", JSON.stringify(transactions));
     }
 
@@ -41,12 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const desc = descInput.value.trim();
         let amount = parseFloat(amountInput.value.trim());
         const category = categoryInput.value.toLowerCase();
+        const date = new Date().toISOString();
 
         if (!desc || isNaN(amount)) return;
 
-        if (category === "income") {
-            amount = Math.abs(amount);
-        } else {
+        if (category !== "income") {
             amount = Math.abs(amount) * -1;
         }
 
@@ -54,7 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
             id: Date.now(),
             desc,
             amount,
-            category
+            category,
+            date
         };
 
         transactions.push(transaction);
@@ -66,5 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
         transactions = transactions.filter(transaction => transaction.id !== id);
         updateUI();
     };
+
+    monthSelect.addEventListener("change", updateUI);
+
     updateUI();
 });
