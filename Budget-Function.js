@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const categoryInput = document.getElementById("category");
     const monthSelect = document.createElement("select");
 
-    // Generate month options
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     months.forEach((month, index) => {
         let option = document.createElement("option");
