@@ -165,13 +165,55 @@ ul {
     list-style: none;
 }
 
+.amount-input {
+    position: relative;
+}
+
+.amount-input small {
+    position: absolute;
+    bottom: -1.5rem;
+    left: 0;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+}
+
+.transaction-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.transaction-desc {
+    font-weight: 500;
+}
+
+.transaction-date {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.transaction-amount {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.transaction-amount.income {
+    color: var(--income-color);
+}
+
+.transaction-amount.expense {
+    color: var(--expense-color);
+}
+
 ul li {
-    background: var(--card-background);
-    padding: 0.75rem;
-    margin: 0.25rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: var(--card-background);
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--border-color);
@@ -211,5 +253,58 @@ ul li button:hover {
 
     .balance h2 {
         font-size: 1.25rem;
+    }
+}
+
+.month-selector {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+#month-select {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    background: #4a5568;
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#month-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.charts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.chart-container {
+    flex: 1;
+    min-width: 300px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.chart-container h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .charts {
+        flex-direction: column;
+    }
+
+    .chart-container {
+        width: 100%;
     }
 }

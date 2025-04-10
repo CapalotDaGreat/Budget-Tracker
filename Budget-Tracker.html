@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Tracker</title>
     <link rel="stylesheet" href="Budget-Style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="Budget-Function.js"></script>
 </head>
 <body>
@@ -14,17 +15,17 @@
     </header>
 
     <section class="balance">
-        <h2>Balance: <span id="balance">CHF0.00</span></h2>
+        <h2>Balance: <span id="balance">CHF 0.00</span></h2>
     </section>
 
     <section class="summary">
         <div class="income">
             <h3>Income</h3>
-            <p id="income">CHF0.00</p>
+            <p id="income">CHF 0.00</p>
         </div>
         <div class="expenses">
             <h3>Expenses</h3>
-            <p id="expenses">CHF0.00</p>
+            <p id="expenses">CHF 0.00</p>
         </div>
     </section>
 
@@ -36,11 +37,17 @@
         </form>
     </section>
 
+    <section class="month-selector">
+        <select id="month-select"></select>
+    </section>
+
     <section class="transactions">
         <form id="transaction-form">
             <h3>Add Transaction</h3>
             <input type="text" id="desc" placeholder="Description" required>
-            <input type="number" id="amount" placeholder="Amount" required>
+            <div class="amount-input">
+                <input type="number" id="amount" placeholder="Amount" required step="0.01">
+            </div>
             <input type="date" id="date" required>
             <select id="category">
                 <option value="income">Income</option>
@@ -60,9 +67,15 @@
         </div>
     </section>
 
-    <section class="chart">
-        <h3>Expense Overview</h3>
-        <canvas id="expenseChart"></canvas>
+    <section class="charts">
+        <div class="chart-container">
+            <h3>Expense Categories</h3>
+            <canvas id="expensePieChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h3>Monthly Expenses</h3>
+            <canvas id="monthlyExpensesChart"></canvas>
+        </div>
     </section>
 </div>
 </body>
