@@ -9,35 +9,61 @@
 </head>
 <body>
 <div class="container">
-    <h1>Budget Tracker</h1>
-    <div class="balance">
-        <h2>Balance: <span id="balance">$0.00</span></h2>
-    </div>
-    <div class="summary">
+    <header>
+        <h1>Budget Tracker</h1>
+    </header>
+
+    <section class="balance">
+        <h2>Balance: <span id="balance">CHF0.00</span></h2>
+    </section>
+
+    <section class="summary">
         <div class="income">
             <h3>Income</h3>
-            <p id="income">$0.00</p>
+            <p id="income">CHF0.00</p>
         </div>
         <div class="expenses">
             <h3>Expenses</h3>
-            <p id="expenses">0.00</p>
+            <p id="expenses">CHF0.00</p>
         </div>
-    </div>
+    </section>
 
-    <form id="transaction-form">
-        <input type="text" id="desc" placeholder="Description" required>
-        <input type="number" id="amount" placeholder="Amount" required>
-        <select id="category">
-            <option value="income">Income</option>
-            <option value="food">Food</option>
-            <option value="rent">Rent</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="tax">Tax</option>
-        </select>
-        <button type="submit">Add Transaction</button>
-    </form>
-    <ul id="transaction-list"></ul>
-    <canvas id="expenseChart"></canvas>
+    <section class="monthly-income">
+        <form id="monthly-income-form">
+            <h3>Set Monthly Income</h3>
+            <input type="number" id="monthly-income" placeholder="Monthly Income" required>
+            <button type="submit">Set Income</button>
+        </form>
+    </section>
+
+    <section class="transactions">
+        <form id="transaction-form">
+            <h3>Add Transaction</h3>
+            <input type="text" id="desc" placeholder="Description" required>
+            <input type="number" id="amount" placeholder="Amount" required>
+            <input type="date" id="date" required>
+            <select id="category">
+                <option value="income">Income</option>
+                <option value="food">Food</option>
+                <option value="rent">Rent</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="tax">Tax</option>
+            </select>
+            <button type="submit">Add Transaction</button>
+        </form>
+    </section>
+
+    <section class="transaction-list">
+        <h3>Transactions</h3>
+        <div class="transaction-list-container">
+            <ul id="transaction-list"></ul>
+        </div>
+    </section>
+
+    <section class="chart">
+        <h3>Expense Overview</h3>
+        <canvas id="expenseChart"></canvas>
+    </section>
 </div>
 </body>
 </html>
