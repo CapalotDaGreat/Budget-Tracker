@@ -12,18 +12,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const dateInput = document.getElementById("date");
     const monthSelect = document.getElementById("month-select");
 
-    // Chart instances
     let expensePieChart = null;
     let monthlyExpensesChart = null;
 
-    // Set default date to today
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const day = String(today.getDate()).padStart(2, '0');
     dateInput.value = `${year}-${month}-${day}`;
 
-    // Format currency as Swiss Francs
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat('de-CH', {
             style: 'currency',
@@ -31,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }).format(amount);
     };
 
-    // Format date to DD/MM/YYYY
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const day = String(date.getDate()).padStart(2, '0');
@@ -40,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${day}/${month}/${year}`;
     };
 
-    // Initialize month selector
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     months.forEach((month, index) => {
         let option = document.createElement("option");
@@ -159,7 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function updateCharts() {
-        // Calculate expenses by category for the current month
         const expensesByCategory = {};
         const monthlyExpenses = new Array(12).fill(0);
 
@@ -180,15 +174,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function addMonthlyIncomeTransaction(month) {
         const year = new Date().getFullYear();
-        // Calculate the payment date (25th or previous Friday if 25th is weekend)
         let paymentDate = new Date(year, month, 25);
         const dayOfWeek = paymentDate.getDay();
 
-        // If 25th is Saturday (6) or Sunday (0), move to previous Friday
-        if (dayOfWeek === 0) { // Sunday
-            paymentDate.setDate(24); // Move to Friday
-        } else if (dayOfWeek === 6) { // Saturday
-            paymentDate.setDate(24); // Move to Friday
+        if (dayOfWeek === 0) {
+            paymentDate.setDate(24);
+        } else if (dayOfWeek === 6) {
+            paymentDate.setDate(24);
         }
 
         const paymentDateString = paymentDate.toISOString();
@@ -255,7 +247,6 @@ document.addEventListener("DOMContentLoaded", () => {
         expensesEl.textContent = formatCurrency(expenses);
         localStorage.setItem("transactions", JSON.stringify(transactions));
 
-        // Update charts
         updateCharts();
     }
 
@@ -263,14 +254,11 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const newMonthlyIncome = parseFloat(monthlyIncomeInput.value);
 
-        // Remove all existing monthly income transactions
         transactions = transactions.filter(transaction => !transaction.id.toString().startsWith('monthly-income-'));
 
-        // Update the monthly income value
         monthlyIncome = newMonthlyIncome;
         localStorage.setItem("monthlyIncome", JSON.stringify(monthlyIncome));
 
-        // Add new monthly income transactions for all months
         for (let month = 0; month < 12; month++) {
             addMonthlyIncomeTransaction(month);
         }
@@ -287,9 +275,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const date = dateInput.value;
 
         if (!desc || isNaN(amount)) return;
-
-        // Always use positive numbers in the input
-        // Convert to negative for non-income categories
         if (category !== "income") {
             amount = -Math.abs(amount);
         }
@@ -305,13 +290,12 @@ document.addEventListener("DOMContentLoaded", () => {
         transactions.push(transaction);
         updateUI();
         transactionForm.reset();
-        // Reset date to today
+
         dateInput.value = `${year}-${month}-${day}`;
     });
 
     window.removeTransaction = (id) => {
         if (!id.toString().startsWith('monthly-income-')) {
-            // Convert numeric IDs to strings for comparison since Date.now() creates numbers
             transactions = transactions.filter(transaction => transaction.id.toString() !== id.toString());
             localStorage.setItem("transactions", JSON.stringify(transactions));
             updateUI();
