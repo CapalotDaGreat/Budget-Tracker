@@ -37,8 +37,18 @@
         </form>
     </section>
 
-    <section class="month-selector">
-        <select id="month-select"></select>
+    <section class="filters">
+        <div class="date-filters">
+            <select id="month-select"></select>
+            <input type="date" id="start-date" placeholder="Start Date">
+            <input type="date" id="end-date" placeholder="End Date">
+            <button id="apply-filter">Apply Filter</button>
+            <button id="reset-filter">Reset</button>
+        </div>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search transactions...">
+            <button id="search-btn">Search</button>
+        </div>
     </section>
 
     <section class="transactions">
@@ -47,6 +57,7 @@
             <input type="text" id="desc" placeholder="Description" required>
             <div class="amount-input">
                 <input type="number" id="amount" placeholder="Amount" required step="0.01">
+                <small>Enter the amount (expenses will be automatically subtracted)</small>
             </div>
             <input type="date" id="date" required>
             <select id="category">
@@ -56,8 +67,45 @@
                 <option value="entertainment">Entertainment</option>
                 <option value="tax">Tax</option>
             </select>
+            <div class="recurring-option">
+                <input type="checkbox" id="is-recurring">
+                <label for="is-recurring">Recurring Transaction</label>
+                <select id="recurring-frequency" disabled>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="quarterly">Quarterly</option>
+                    <option value="yearly">Yearly</option>
+                </select>
+            </div>
             <button type="submit">Add Transaction</button>
         </form>
+    </section>
+
+    <section class="category-management">
+        <h3>Category Management</h3>
+        <div class="category-controls">
+            <div class="add-category">
+                <input type="text" id="new-category" placeholder="New Category">
+                <button id="add-category-btn">Add Category</button>
+            </div>
+            <div class="category-list">
+                <h4>Current Categories</h4>
+                <ul id="categories-list"></ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="budget-limits">
+        <h3>Budget Limits</h3>
+        <div class="budget-limit-controls">
+            <select id="limit-category"></select>
+            <input type="number" id="limit-amount" placeholder="Monthly Limit">
+            <button id="set-limit-btn">Set Limit</button>
+        </div>
+        <div class="budget-limits-list">
+            <h4>Current Limits</h4>
+            <ul id="budget-limits-list"></ul>
+        </div>
     </section>
 
     <section class="transaction-list">
@@ -75,6 +123,17 @@
         <div class="chart-container">
             <h3>Monthly Expenses</h3>
             <canvas id="monthlyExpensesChart"></canvas>
+        </div>
+    </section>
+
+    <section class="charts">
+        <div class="chart-container">
+            <h3>Spending Trends</h3>
+            <canvas id="trendChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h3>Budget vs Actual</h3>
+            <canvas id="budgetComparisonChart"></canvas>
         </div>
     </section>
 </div>
