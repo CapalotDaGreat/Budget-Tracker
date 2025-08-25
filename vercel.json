@@ -1,0 +1,12 @@
+{
+	"version": 2,
+	"builds": [
+		{ "src": "index.html", "use": "@vercel/static" },
+		{ "src": "Budget-Tracker.html", "use": "@vercel/static" },
+		{ "src": "Budget-Style.css", "use": "@vercel/static" },
+		{ "src": "Budget-Function.js", "use": "@vercel/static" }
+	],
+	"routes": [
+		{ "src": "/(.*)", "dest": "/index.html" }
+	]
+}

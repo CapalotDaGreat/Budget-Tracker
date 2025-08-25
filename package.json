@@ -1,0 +1,12 @@
+{
+  "name": "budget-tracker",
+  "version": "1.0.0",
+  "description": "A client-side budget tracking application",
+  "main": "public/index.html",
+  "scripts": {
+    "start": "serve public"
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}
