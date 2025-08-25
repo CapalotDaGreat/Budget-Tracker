@@ -1,12 +1,11 @@
 {
 	"version": 2,
+	"public": true,
 	"builds": [
-		{ "src": "index.html", "use": "@vercel/static" },
-		{ "src": "Budget-Tracker.html", "use": "@vercel/static" },
-		{ "src": "Budget-Style.css", "use": "@vercel/static" },
-		{ "src": "Budget-Function.js", "use": "@vercel/static" }
+		{ "src": "index.html", "use": "@vercel/static" }
 	],
 	"routes": [
-		{ "src": "/(.*)", "dest": "/index.html" }
+		{ "handle": "filesystem" },
+		{ "src": "/.*", "dest": "/index.html" }
 	]
 }
