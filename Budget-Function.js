@@ -45,7 +45,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let isFilterActive = false;
     let searchTerm = "";
     let recurringTransactions = JSON.parse(localStorage.getItem("recurringTransactions")) || [];
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat('de-CH', {
             style: 'currency',
@@ -77,14 +81,22 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateCategorySelects() {
         categoryInput.innerHTML = "";
         limitCategorySelect.innerHTML = "";
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         categories.forEach(category => {
             let option = document.createElement("option");
             option.value = category.toLowerCase();
             option.textContent = category.charAt(0).toUpperCase() + category.slice(1);
             categoryInput.appendChild(option);
         });
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         categories.filter(category => category.toLowerCase() !== "income").forEach(category => {
             let option = document.createElement("option");
             option.value = category.toLowerCase();
@@ -95,10 +107,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateCategoriesList() {
         categoriesList.innerHTML = "";
+<<<<<<< HEAD
         
         categories.forEach(category => {
             if (category.toLowerCase() === "income") return;
             
+=======
+
+        categories.forEach(category => {
+            if (category.toLowerCase() === "income") return;
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
             const li = document.createElement("li");
             li.innerHTML = `
                 <span>${category.charAt(0).toUpperCase() + category.slice(1)}</span>
@@ -108,7 +127,11 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             categoriesList.appendChild(li);
         });
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         document.querySelectorAll(".delete-category").forEach(button => {
             button.addEventListener("click", (e) => {
                 const categoryToDelete = e.target.getAttribute("data-category");
@@ -119,7 +142,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateBudgetLimitsList() {
         budgetLimitsList.innerHTML = "";
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         Object.keys(budgetLimits).forEach(category => {
             const limit = budgetLimits[category];
             const li = document.createElement("li");
@@ -131,7 +158,11 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             budgetLimitsList.appendChild(li);
         });
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         document.querySelectorAll(".delete-limit").forEach(button => {
             button.addEventListener("click", (e) => {
                 const categoryToDelete = e.target.getAttribute("data-category");
@@ -142,6 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function addCategory(categoryName) {
         categoryName = categoryName.trim().toLowerCase();
+<<<<<<< HEAD
         
         if (categoryName === "") return;
         if (categories.includes(categoryName)) return;
@@ -149,21 +181,41 @@ document.addEventListener("DOMContentLoaded", () => {
         categories.push(categoryName);
         localStorage.setItem("categories", JSON.stringify(categories));
         
+=======
+
+        if (categoryName === "") return;
+        if (categories.includes(categoryName)) return;
+
+        categories.push(categoryName);
+        localStorage.setItem("categories", JSON.stringify(categories));
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         updateCategorySelects();
         updateCategoriesList();
     }
 
     function deleteCategory(categoryName) {
         if (categoryName.toLowerCase() === "income") return;
+<<<<<<< HEAD
         
         categories = categories.filter(cat => cat !== categoryName);
         localStorage.setItem("categories", JSON.stringify(categories));
         
+=======
+
+        categories = categories.filter(cat => cat !== categoryName);
+        localStorage.setItem("categories", JSON.stringify(categories));
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         if (budgetLimits[categoryName]) {
             delete budgetLimits[categoryName];
             localStorage.setItem("budgetLimits", JSON.stringify(budgetLimits));
         }
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         updateCategorySelects();
         updateCategoriesList();
         updateBudgetLimitsList();
@@ -171,10 +223,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function setBudgetLimit(category, amount) {
         if (category === "income" || amount <= 0) return;
+<<<<<<< HEAD
         
         budgetLimits[category] = amount;
         localStorage.setItem("budgetLimits", JSON.stringify(budgetLimits));
         
+=======
+
+        budgetLimits[category] = amount;
+        localStorage.setItem("budgetLimits", JSON.stringify(budgetLimits));
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         updateBudgetLimitsList();
         updateUI();
     }
@@ -183,7 +242,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (budgetLimits[category]) {
             delete budgetLimits[category];
             localStorage.setItem("budgetLimits", JSON.stringify(budgetLimits));
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
             updateBudgetLimitsList();
             updateUI();
         }
@@ -192,6 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function matchesFilter(transaction) {
         const transactionDate = new Date(transaction.date);
         const selectedMonth = parseInt(monthSelect.value);
+<<<<<<< HEAD
         
         if (!isFilterActive) {
             return transactionDate.getMonth() === selectedMonth;
@@ -200,6 +264,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const startDate = startDateInput.value ? new Date(startDateInput.value) : null;
         const endDate = endDateInput.value ? new Date(endDateInput.value) : null;
         
+=======
+
+        if (!isFilterActive) {
+            return transactionDate.getMonth() === selectedMonth;
+        }
+
+        const startDate = startDateInput.value ? new Date(startDateInput.value) : null;
+        const endDate = endDateInput.value ? new Date(endDateInput.value) : null;
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         if (startDate && endDate) {
             return transactionDate >= startDate && transactionDate <= endDate;
         } else if (startDate) {
@@ -207,21 +281,36 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (endDate) {
             return transactionDate <= endDate;
         }
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         return true;
     }
 
     function matchesSearch(transaction) {
         if (!searchTerm) return true;
+<<<<<<< HEAD
         
         const termLower = searchTerm.toLowerCase();
         return transaction.desc.toLowerCase().includes(termLower) || 
                transaction.category.toLowerCase().includes(termLower);
+=======
+
+        const termLower = searchTerm.toLowerCase();
+        return transaction.desc.toLowerCase().includes(termLower) ||
+            transaction.category.toLowerCase().includes(termLower);
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
     }
 
     function createExpensePieChart(expensesByCategory) {
         const ctx = document.getElementById('expensePieChart').getContext('2d');
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         if (expensePieChart) {
             expensePieChart.destroy();
         }
@@ -231,10 +320,17 @@ document.addEventListener("DOMContentLoaded", () => {
             '#FF9F40', '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'
         ];
 
+<<<<<<< HEAD
         const sortedCategories = Object.keys(expensesByCategory).sort((a, b) => 
             expensesByCategory[b] - expensesByCategory[a]
         );
         
+=======
+        const sortedCategories = Object.keys(expensesByCategory).sort((a, b) =>
+            expensesByCategory[b] - expensesByCategory[a]
+        );
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         const chartData = sortedCategories.map(category => expensesByCategory[category]);
         const chartColors = sortedCategories.map((_, i) => colors[i % colors.length]);
 
@@ -275,14 +371,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createMonthlyExpensesChart(monthlyExpenses) {
         const ctx = document.getElementById('monthlyExpensesChart').getContext('2d');
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         if (monthlyExpensesChart) {
             monthlyExpensesChart.destroy();
         }
 
         const nonZeroMonths = monthlyExpenses.filter(amount => amount > 0);
+<<<<<<< HEAD
         const average = nonZeroMonths.length > 0 
             ? nonZeroMonths.reduce((a, b) => a + b, 0) / nonZeroMonths.length 
+=======
+        const average = nonZeroMonths.length > 0
+            ? nonZeroMonths.reduce((a, b) => a + b, 0) / nonZeroMonths.length
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
             : 0;
 
         const textColor = '#f7fafc';
@@ -355,7 +460,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createTrendChart(trendData) {
         const ctx = document.getElementById('trendChart').getContext('2d');
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         if (trendChart) {
             trendChart.destroy();
         }
@@ -365,6 +474,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .filter(t => t.amount < 0)
                 .map(t => t.category)
         )];
+<<<<<<< HEAD
         
         const datasets = categories.map((category, index) => {
             const colors = [
@@ -373,6 +483,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'
             ];
             
+=======
+
+        const datasets = categories.map((category, index) => {
+            const colors = [
+                'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'
+            ];
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
             return {
                 label: category.charAt(0).toUpperCase() + category.slice(1),
                 data: trendData[category] || [],
@@ -434,7 +554,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createBudgetComparisonChart(budgetData) {
         const ctx = document.getElementById('budgetComparisonChart').getContext('2d');
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         if (budgetComparisonChart) {
             budgetComparisonChart.destroy();
         }
@@ -442,7 +566,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const categories = Object.keys(budgetData);
         const actualData = categories.map(category => budgetData[category].actual);
         const budgetedData = categories.map(category => budgetData[category].budget);
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         const textColor = '#f7fafc';
 
         budgetComparisonChart = new Chart(ctx, {
@@ -519,6 +647,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 trendData[category] = new Array(12).fill(0);
             }
         });
+<<<<<<< HEAD
         
         transactions.forEach(transaction => {
             const amount = parseFloat(transaction.amount);
@@ -538,6 +667,27 @@ document.addEventListener("DOMContentLoaded", () => {
                     trendData[category][transactionMonth] += absAmount;
                 }
                 
+=======
+
+        transactions.forEach(transaction => {
+            const amount = parseFloat(transaction.amount);
+            const transactionMonth = new Date(transaction.date).getMonth();
+
+            if (amount < 0) {
+                const category = transaction.category;
+                const absAmount = Math.abs(amount);
+
+                if (matchesFilter(transaction) && matchesSearch(transaction)) {
+                    expensesByCategory[category] = (expensesByCategory[category] || 0) + absAmount;
+                }
+
+                monthlyExpenses[transactionMonth] += absAmount;
+
+                if (trendData[category]) {
+                    trendData[category][transactionMonth] += absAmount;
+                }
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
                 if (transactionMonth === parseInt(monthSelect.value)) {
                     if (!budgetComparisonData[category]) {
                         budgetComparisonData[category] = {
@@ -560,6 +710,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const year = new Date().getFullYear();
         let paymentDate = new Date(year, month, 25);
         const dayOfWeek = paymentDate.getDay();
+<<<<<<< HEAD
         if (dayOfWeek === 0) { 
             paymentDate.setDate(24); 
         } else if (dayOfWeek === 6) { 
@@ -570,6 +721,18 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const existingIncome = transactions.find(t => 
             t.desc === "Monthly Income" && 
+=======
+        if (dayOfWeek === 0) {
+            paymentDate.setDate(24);
+        } else if (dayOfWeek === 6) {
+            paymentDate.setDate(24);
+        }
+
+        const paymentDateString = paymentDate.toISOString();
+
+        const existingIncome = transactions.find(t =>
+            t.desc === "Monthly Income" &&
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
             new Date(t.date).getMonth() === month &&
             new Date(t.date).getFullYear() === year
         );
@@ -593,10 +756,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const selectedMonth = parseInt(monthSelect.value);
         addMonthlyIncomeTransaction(selectedMonth);
+<<<<<<< HEAD
         
         processRecurringTransactions();
         
         const filteredTransactions = transactions.filter(transaction => 
+=======
+
+        processRecurringTransactions();
+
+        const filteredTransactions = transactions.filter(transaction =>
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
             matchesFilter(transaction) && matchesSearch(transaction)
         );
 
@@ -608,6 +778,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const isIncome = amount > 0;
             const isMonthlyIncome = transaction.id.toString().startsWith('monthly-income-');
             const isRecurring = transaction.recurring;
+<<<<<<< HEAD
             
             const category = transaction.category;
             const currentMonth = new Date(transaction.date).getMonth();
@@ -617,21 +788,43 @@ document.addEventListener("DOMContentLoaded", () => {
                 const categoryTotal = transactions
                     .filter(t => 
                         t.category === category && 
+=======
+
+            const category = transaction.category;
+            const currentMonth = new Date(transaction.date).getMonth();
+            let budgetWarning = "";
+
+            if (!isIncome && budgetLimits[category] && currentMonth === selectedMonth) {
+                const categoryTotal = transactions
+                    .filter(t =>
+                        t.category === category &&
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
                         new Date(t.date).getMonth() === currentMonth &&
                         t.amount < 0
                     )
                     .reduce((sum, t) => sum + Math.abs(parseFloat(t.amount)), 0);
+<<<<<<< HEAD
                 
                 const limit = budgetLimits[category];
                 const percentUsed = (categoryTotal / limit) * 100;
                 
+=======
+
+                const limit = budgetLimits[category];
+                const percentUsed = (categoryTotal / limit) * 100;
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
                 if (percentUsed >= 100) {
                     budgetWarning = `<div class="budget-warning budget-exceeded">Budget exceeded! (${formatCurrency(categoryTotal)} / ${formatCurrency(limit)})</div>`;
                 } else if (percentUsed >= 80) {
                     budgetWarning = `<div class="budget-warning">Approaching budget limit (${Math.round(percentUsed)}% used)</div>`;
                 }
             }
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
             li.innerHTML = `
                 <div class="transaction-info">
                     <span class="transaction-desc">${transaction.desc} ${isRecurring ? '(Recurring)' : ''}</span>
@@ -755,6 +948,99 @@ document.addEventListener("DOMContentLoaded", () => {
         updateUI();
     });
 
+    function processRecurringTransactions() {
+        const today = new Date();
+
+        recurringTransactions.forEach(recTrans => {
+            const lastCreated = new Date(recTrans.lastCreated);
+            let nextDate = new Date(lastCreated);
+
+            switch (recTrans.frequency) {
+                case 'weekly':
+                    nextDate.setDate(nextDate.getDate() + 7);
+                    break;
+                case 'monthly':
+                    const dayOfMonth = lastCreated.getDate();
+                    nextDate.setMonth(nextDate.getMonth() + 1);
+
+                    const newMonth = nextDate.getMonth();
+                    if (nextDate.getDate() !== dayOfMonth) {
+                        nextDate.setDate(0);
+                    }
+                    break;
+                case 'quarterly':
+                    const quarterlyDayOfMonth = lastCreated.getDate();
+                    nextDate.setMonth(nextDate.getMonth() + 3);
+
+                    if (nextDate.getDate() !== quarterlyDayOfMonth) {
+                        nextDate.setDate(0);
+                    }
+                    break;
+                case 'yearly':
+                    nextDate.setFullYear(nextDate.getFullYear() + 1);
+                    break;
+            }
+
+            while (nextDate <= today) {
+                const newTransaction = {
+                    id: Date.now() + Math.random().toString(36).substr(2, 5),
+                    desc: recTrans.desc,
+                    amount: recTrans.amount,
+                    category: recTrans.category,
+                    date: nextDate.toISOString(),
+                    recurring: true
+                };
+
+                transactions.push(newTransaction);
+
+                recTrans.lastCreated = nextDate.toISOString();
+
+                switch (recTrans.frequency) {
+                    case 'weekly':
+                        nextDate.setDate(nextDate.getDate() + 7);
+                        break;
+                    case 'monthly':
+                        const dayOfMonth = new Date(recTrans.lastCreated).getDate();
+                        nextDate.setMonth(nextDate.getMonth() + 1);
+
+                        if (nextDate.getDate() !== dayOfMonth) {
+                            nextDate.setDate(0);
+                        }
+                        break;
+                    case 'quarterly':
+                        const quarterlyDayOfMonth = new Date(recTrans.lastCreated).getDate();
+                        nextDate.setMonth(nextDate.getMonth() + 3);
+
+                        if (nextDate.getDate() !== quarterlyDayOfMonth) {
+                            nextDate.setDate(0);
+                        }
+                        break;
+                    case 'yearly':
+                        nextDate.setFullYear(nextDate.getFullYear() + 1);
+                        break;
+                }
+            }
+        });
+
+        localStorage.setItem("recurringTransactions", JSON.stringify(recurringTransactions));
+    }
+
+    monthlyIncomeForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const newMonthlyIncome = parseFloat(monthlyIncomeInput.value);
+
+        transactions = transactions.filter(transaction => !transaction.id.toString().startsWith('monthly-income-'));
+
+        monthlyIncome = newMonthlyIncome;
+        localStorage.setItem("monthlyIncome", JSON.stringify(monthlyIncome));
+
+        for (let month = 0; month < 12; month++) {
+            addMonthlyIncomeTransaction(month);
+        }
+
+        updateUI();
+    });
+
     transactionForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -772,7 +1058,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const transactionDate = new Date(date);
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
         const transaction = {
             id: Date.now(),
             desc,
@@ -793,7 +1083,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 lastCreated: transactionDate.toISOString(),
                 startDate: transactionDate.toISOString()
             };
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
             recurringTransactions.push(recurringTransaction);
             localStorage.setItem("recurringTransactions", JSON.stringify(recurringTransactions));
         }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Tracker</title>
     <link rel="stylesheet" href="Budget-Style.css">
+<<<<<<< HEAD
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -169,9 +170,143 @@
         <div class="chart-container">
             <h2 class="chart-title">Budget vs Actual</h2>
             <canvas id="budgetComparisonChart"></canvas>
-        </div>
-    </div>
-
+=======
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="Budget-Function.js"></script>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Budget Tracker</h1>
+    </header>
+
+    <section class="balance">
+        <h2>Balance: <span id="balance">CHF 0.00</span></h2>
+    </section>
+
+    <section class="summary">
+        <div class="income">
+            <h3>Income</h3>
+            <p id="income">CHF 0.00</p>
+        </div>
+        <div class="expenses">
+            <h3>Expenses</h3>
+            <p id="expenses">CHF 0.00</p>
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
+        </div>
+    </section>
+
+<<<<<<< HEAD
+    <script src="Budget-Function.js"></script>
+=======
+    <section class="monthly-income">
+        <form id="monthly-income-form">
+            <h3>Set Monthly Income</h3>
+            <input type="number" id="monthly-income" placeholder="Monthly Income" required>
+            <button type="submit">Set Income</button>
+        </form>
+    </section>
+
+    <section class="filters">
+        <div class="date-filters">
+            <select id="month-select"></select>
+            <input type="date" id="start-date" placeholder="Start Date">
+            <input type="date" id="end-date" placeholder="End Date">
+            <button id="apply-filter">Apply Filter</button>
+            <button id="reset-filter">Reset</button>
+        </div>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search transactions...">
+            <button id="search-btn">Search</button>
+        </div>
+    </section>
+
+    <section class="transactions">
+        <form id="transaction-form">
+            <h3>Add Transaction</h3>
+            <input type="text" id="desc" placeholder="Description" required>
+            <div class="amount-input">
+                <input type="number" id="amount" placeholder="Amount" required step="0.01">
+                <small>Enter the amount (expenses will be automatically subtracted)</small>
+            </div>
+            <input type="date" id="date" required>
+            <select id="category">
+                <option value="income">Income</option>
+                <option value="food">Food</option>
+                <option value="rent">Rent</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="tax">Tax</option>
+            </select>
+            <div class="recurring-option">
+                <input type="checkbox" id="is-recurring">
+                <label for="is-recurring">Recurring Transaction</label>
+                <select id="recurring-frequency" disabled>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="quarterly">Quarterly</option>
+                    <option value="yearly">Yearly</option>
+                </select>
+            </div>
+            <button type="submit">Add Transaction</button>
+        </form>
+    </section>
+
+    <section class="category-management">
+        <h3>Category Management</h3>
+        <div class="category-controls">
+            <div class="add-category">
+                <input type="text" id="new-category" placeholder="New Category">
+                <button id="add-category-btn">Add Category</button>
+            </div>
+            <div class="category-list">
+                <h4>Current Categories</h4>
+                <ul id="categories-list"></ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="budget-limits">
+        <h3>Budget Limits</h3>
+        <div class="budget-limit-controls">
+            <select id="limit-category"></select>
+            <input type="number" id="limit-amount" placeholder="Monthly Limit">
+            <button id="set-limit-btn">Set Limit</button>
+        </div>
+        <div class="budget-limits-list">
+            <h4>Current Limits</h4>
+            <ul id="budget-limits-list"></ul>
+        </div>
+    </section>
+
+    <section class="transaction-list">
+        <h3>Transactions</h3>
+        <div class="transaction-list-container">
+            <ul id="transaction-list"></ul>
+        </div>
+    </section>
+
+    <section class="charts">
+        <div class="chart-container">
+            <h3>Expense Categories</h3>
+            <canvas id="expensePieChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h3>Monthly Expenses</h3>
+            <canvas id="monthlyExpensesChart"></canvas>
+        </div>
+    </section>
+
+    <section class="charts">
+        <div class="chart-container">
+            <h3>Spending Trends</h3>
+            <canvas id="trendChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h3>Budget vs Actual</h3>
+            <canvas id="budgetComparisonChart"></canvas>
+        </div>
+    </section>
+</div>
+>>>>>>> e1926b67d343ba504676ab3eec47c06267823c4c
 </body>
 </html>
